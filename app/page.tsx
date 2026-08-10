@@ -232,8 +232,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------- Our Qualified Doctors ---------------- */}
-      <section>
+      {/* ---------------- Our Qualified Doctors ----------------
+          The live site paints this band with Frame-3.png — a purely vertical
+          pink-to-white wash, drawn `cover` so only its middle 30–70% shows.
+          Reproduced here as the equivalent gradient. */}
+      <section
+        style={{
+          backgroundImage:
+            "linear-gradient(to bottom, #fdf3f6 0%, #fdf5f8 25%, #fdf8fa 50%, #fefafb 75%, #fefcfc 100%)",
+        }}
+      >
         <div className="container-1280">
           <div className="px-8 pt-8">
             <div className="mx-auto max-w-[600px] py-8">
@@ -260,13 +268,17 @@ export default function Home() {
                   i === 0 ? "bg-white" : ""
                 }`}
               >
-                <Image
-                  src={doctor.thumb}
-                  alt=""
-                  width={180}
-                  height={180}
-                  className="h-[180px] w-[180px] rounded-full object-cover"
-                />
+                <div className="group/photo relative h-[180px] w-[180px] overflow-hidden rounded-full shadow-[0_3px_7px_0_rgba(0,0,0,0.1)]">
+                  <Image
+                    src={doctor.thumb}
+                    alt=""
+                    width={180}
+                    height={180}
+                    className="h-[180px] w-[180px] object-cover"
+                  />
+                  {/* Tint slides up over the photo on hover (ElementsKit team card) */}
+                  <span className="pointer-events-none absolute inset-x-0 top-full h-full bg-[rgba(30,6,14,0.3)] transition-all delay-[200ms] duration-[400ms] group-hover/photo:top-0 group-hover/photo:delay-0" />
+                </div>
                 <span className="mt-5 block h-8 font-montserrat text-[18px] font-semibold leading-[25.2px] text-heading">
                   {doctor.name}
                 </span>
