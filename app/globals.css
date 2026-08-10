@@ -1,0 +1,255 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   The Southern Clinic — design tokens copied from the live site
+   (WordPress / Astra + Elementor build at southernclinic.com.au)
+------------------------------------------------------------------- */
+@theme {
+  --font-manrope: Manrope, sans-serif;
+  --font-montserrat: Montserrat, sans-serif;
+  --font-inter: Inter, sans-serif;
+  --font-raleway: Raleway, sans-serif;
+  --font-opensans: "Open Sans", sans-serif;
+
+  --color-heading: #181818;
+  --color-heading-alt: #303334;
+  --color-body: #848587;
+  --color-body-dark: #161616;
+  --color-muted: #666666;
+  --color-card-desc: #656565;
+  --color-nav: #344556;
+  --color-sky: #00adef;
+  --color-phone: #1896fe;
+  --color-slate: #3e4e5e;
+  --color-pale: #d1e2f2;
+  --color-teal: #16c1cc;
+  --color-hours: #5fc3e9;
+  --color-soft: #f7f9fb;
+  --color-cta: #ebf6ff;
+  --color-accordion: #474747;
+}
+
+:root {
+  --container: 1280px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-muted);
+  font-family: var(--font-inter);
+  font-size: 16px;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+/* Elementor's boxed container — flush at desktop, 10px gutter below 1025px */
+.container-1280 {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: 10px;
+}
+
+@media (min-width: 1024px) {
+  .container-1280 {
+    padding-inline: 0;
+  }
+}
+
+/* Headings — Manrope 800, letter-spacing -1px (matches Elementor kit) */
+.h-display {
+  font-family: var(--font-manrope);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--color-heading);
+}
+
+/* Headings the live site paints in the softer heading tone. Declared after
+   .h-display so it wins — Tailwind's text-* utilities sit in a layer and lose
+   to the unlayered .h-display rule above. */
+.h-alt {
+  color: var(--color-heading-alt);
+}
+
+/* Small uppercase label above headings */
+.eyebrow {
+  font-family: var(--font-montserrat);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: uppercase;
+  color: var(--color-sky);
+}
+
+/* Body copy inside content columns */
+.copy {
+  font-family: var(--font-manrope);
+  font-size: 17px;
+  line-height: 32px;
+  color: var(--color-body);
+}
+
+/* Buttons ------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-montserrat);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  line-height: 1;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+/* Elementor sets the icon spacing per button widget, so it varies per button */
+.btn-gap-14 {
+  gap: 14px;
+}
+
+.btn-gap-16 {
+  gap: 16px;
+}
+
+.btn-primary {
+  background: #303334;
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 18px 30px;
+}
+
+.btn-primary:hover {
+  background: #00adef;
+}
+
+/* Elementor's "icon after text" buttons carry their own asymmetric padding */
+.btn-icon-right {
+  gap: 13px;
+  padding: 18px 40px 18px 54px;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #3d3d3d;
+  border: 1px solid #00adef;
+  border-radius: 6px;
+  padding: 15px 30px;
+}
+
+.btn-outline:hover {
+  background: #00adef;
+  color: #ffffff;
+}
+
+.btn-outline-dark {
+  background: transparent;
+  color: #000000;
+  border: 1px solid #5a5a5a;
+  border-radius: 6px;
+  padding: 18px 62px;
+  font-family: var(--font-manrope);
+  font-size: 17px;
+}
+
+.btn-outline-dark:hover {
+  background: #303334;
+  color: #ffffff;
+  border-color: #303334;
+}
+
+/* Fees table ---------------------------------------------------- */
+.fees-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-inter);
+  font-size: 16px;
+}
+
+.fees-table th,
+.fees-table td {
+  border: 1px solid #eaeaea;
+  padding: 11.2px 16px;
+  text-align: center;
+  font-weight: 600;
+  color: #000000;
+  vertical-align: middle;
+}
+
+.fees-table th {
+  background: #f7f9fb;
+}
+
+/* Entrance animations — Elementor's set, triggered on scroll into view */
+@keyframes sc-fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes sc-fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sc-fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes sc-zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sc-bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sc-headline-dash {
+  0% {
+    stroke-dasharray: 0 1500;
+    opacity: 1;
+  }
+  to {
+    stroke-dasharray: 1500 1500;
+    opacity: 1;
+  }
+}
+
