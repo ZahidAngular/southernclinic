@@ -93,6 +93,20 @@ body {
   color: var(--color-body);
 }
 
+/* Modifiers for .copy — declared after it so they win, since .copy is
+   unlayered while Tailwind's colour and leading utilities sit in a layer. */
+.copy-29 {
+  line-height: 29px;
+}
+
+.copy-dark {
+  color: var(--color-body-dark);
+}
+
+.copy-black {
+  color: #000000;
+}
+
 /* Buttons ------------------------------------------------------- */
 .btn {
   display: inline-flex;
@@ -108,6 +122,10 @@ body {
 }
 
 /* Elementor sets the icon spacing per button widget, so it varies per button */
+.btn-gap-13 {
+  gap: 13px;
+}
+
 .btn-gap-14 {
   gap: 14px;
 }
@@ -123,7 +141,9 @@ body {
   padding: 18px 30px;
 }
 
-.btn-primary:hover {
+/* Only the hero's "Meet our doctors" changes colour on hover — the live site's
+   other dark buttons declare #303334 for hover too, i.e. no visible change. */
+.btn-hover-sky:hover {
   background: #00adef;
 }
 
@@ -156,23 +176,30 @@ body {
   font-size: 17px;
 }
 
-.btn-outline-dark:hover {
-  background: #303334;
-  color: #ffffff;
-  border-color: #303334;
-}
+/* "Check Fees" has no hover rule on the live site — left deliberately static. */
 
 /* Fees table ---------------------------------------------------- */
+/* Grid lines come from a top/left border on the table plus right/bottom on
+   every cell, so the lines stay single. Header strip is #f7f7f7. */
 .fees-table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-top: 1px solid #d1d5db;
+  border-left: 1px solid #d1d5db;
   font-family: var(--font-inter);
   font-size: 16px;
+  line-height: 22.4px;
+}
+
+.fees-table thead {
+  background: #f7f7f7;
 }
 
 .fees-table th,
 .fees-table td {
-  border: 1px solid #eaeaea;
+  border-right: 1px solid #d1d5db;
+  border-bottom: 1px solid #d1d5db;
   padding: 11.2px 16px;
   text-align: center;
   font-weight: 600;
@@ -180,8 +207,10 @@ body {
   vertical-align: middle;
 }
 
-.fees-table th {
-  background: #f7f9fb;
+/* Individual body cells light up on hover — not whole rows */
+.fees-table td:hover {
+  background: #00adef;
+  color: #ffffff;
 }
 
 /* Entrance animations — Elementor's set, triggered on scroll into view */
@@ -198,6 +227,17 @@ body {
   from {
     opacity: 0;
     transform: translateY(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sc-fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
   }
   to {
     opacity: 1;
@@ -251,5 +291,44 @@ body {
     stroke-dasharray: 1500 1500;
     opacity: 1;
   }
+}
+
+@keyframes sc-button-ripple {
+  0% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0.6;
+  }
+  70% {
+    box-shadow: 0 0 0 15px currentColor;
+    opacity: 0;
+  }
+  100% {
+    box-shadow: 0 0 0 0 currentColor;
+    opacity: 0;
+  }
+}
+
+/* Contact page's video-play button — two staggered ripple rings behind it.
+   No position rule here: the button already carries Tailwind's `absolute`,
+   which is itself a valid containing block for these pseudo-elements —
+   adding `position: relative` here would win the cascade and override it. */
+.glow-btn::before,
+.glow-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 currentColor;
+  animation: sc-button-ripple 3s infinite;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.glow-btn::before {
+  animation-delay: 0.9s;
+}
+
+.glow-btn::after {
+  animation-delay: 0.3s;
 }
 

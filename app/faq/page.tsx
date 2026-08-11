@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { FileText } from "lucide-react";
+import { FaqIcon } from "@/components/icons";
 import { PageHero } from "@/components/PageHero";
 import { Accordion } from "@/components/Accordion";
 import { FAQS } from "@/lib/content";
@@ -14,15 +14,18 @@ export default function FaqPage() {
       <PageHero title="FAQ" subtitle="Common Questions Answered" />
 
       <section>
-        <div className="container-1280">
-          <div className="py-16 lg:py-24">
-            <div className="mb-4 flex items-center gap-3">
-              <FileText className="h-6 w-6 text-heading-alt" strokeWidth={1.75} />
-              <h3 className="font-manrope text-[18px] font-semibold text-heading-alt">
+        {/* This page sits in a narrower 1000px container than the rest of the site */}
+        <div className="mx-auto w-full max-w-[1000px] px-[10px] py-16 lg:px-0 lg:py-16">
+          <div className="flex flex-col gap-5 p-4">
+            <div className="flex items-end">
+              <span className="mr-[17px] flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#dcf6f7]">
+                <FaqIcon className="h-7 w-[32.6px] text-sky" />
+              </span>
+              <h3 className="mb-[17px] font-manrope text-[18px] font-semibold leading-[1.3] text-heading-alt">
                 Basic information for patients
               </h3>
             </div>
-            <h1 className="h-display mb-10 text-[32px] leading-[1.15] lg:text-[45px] lg:leading-[50px]">
+            <h1 className="h-display text-[32px] leading-[1.15] lg:text-[45px] lg:leading-[50px]">
               Frequently asked questions
             </h1>
             <Accordion items={FAQS} />

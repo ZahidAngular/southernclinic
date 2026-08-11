@@ -55,7 +55,7 @@ export function Footer() {
           <div className="py-4">
             <div className="flex flex-col items-center gap-3 p-[10px] font-inter text-[13px] leading-[19.5px] lg:flex-row lg:justify-between lg:gap-5">
               <p className="text-black">
-                © 2024 Southern Clinic Powered by{" "}
+                © 2024 The Southern Clinic Powered by{" "}
                 <a href="https://webappconsulting.com.au/" className="hover:text-sky">
                   Web App Consulting
                 </a>

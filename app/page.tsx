@@ -11,7 +11,6 @@ import {
   ShieldCheckIcon,
 } from "@/components/icons";
 import { Reveal } from "@/components/Reveal";
-import { HighlightHeadline } from "@/components/HighlightHeadline";
 import { CLINIC, HOME_DOCTORS } from "@/lib/content";
 
 export default function Home() {
@@ -35,17 +34,19 @@ export default function Home() {
               </Reveal>
               <div className="mt-[33px] flex flex-wrap items-center gap-[19px]">
                 <Reveal variant="fadeInLeft" delay={300}>
-                  <Link href="/doctors" className="btn btn-primary">
+                  <Link href="/doctors" className="btn btn-primary btn-hover-sky">
                     Meet our doctors
                   </Link>
                 </Reveal>
                 <Reveal variant="fadeInLeft" delay={200}>
-                  <Link href="/contact" className="btn btn-outline btn-gap-14">
-                    <span className="flex h-[19px] w-4 items-center justify-center">
-                      <PhoneVolumeIcon className="h-4 w-4" />
-                    </span>
-                    contact us
-                  </Link>
+                  <a
+                    href={CLINIC.hotdoc}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline btn-gap-14"
+                  >
+                    Book Now
+                  </a>
                 </Reveal>
               </div>
             </div>
@@ -102,17 +103,19 @@ export default function Home() {
                     <DocumentAltIcon className="h-7 w-[24.6px] text-sky" />
                   </span>
                   <span className="mb-[17px] font-manrope text-[18px] font-semibold leading-[1.3] text-heading-alt">
-                    About Southern Clinic
+                    About The Southern Clinic
                   </span>
                 </div>
                 <Reveal variant="fadeInDown" delay={100}>
                   <h1 className="h-display mt-5 text-[32px] leading-[1.15] lg:text-[45px] lg:leading-[50px]">
-                    Comprehensive Healthcare for All
+                    Delivering Comprehensive Healthcare for All Since 1950
                   </h1>
                 </Reveal>
                 <p className="copy mt-5">
-                  Southern Clinic has been a trusted pillar of family-oriented healthcare, serving
-                  patients in Clovelly Park and the surrounding areas since 1950.
+                  The Southern Clinic has been a trusted pillar of family-oriented healthcare,
+                  serving patients in Clovelly Park and the surrounding areas since 1950. We are a
+                  mixed billing practice. Fees vary according to the length and complexity of the
+                  consultation and are determined by individual doctors.
                 </p>
               </Reveal>
               <div className="mt-[47px] flex flex-wrap items-center gap-5 lg:grid lg:grid-cols-2 lg:items-start lg:justify-items-start">
@@ -165,7 +168,8 @@ export default function Home() {
               </h1>
             </Reveal>
             <p className="copy mt-5">
-              At Southern Clinic, we take pride in delivering compassionate, patient-centered care.
+              At The Southern Clinic, we take pride in delivering compassionate, patient-centered
+              care.
               Our modern facilities and dedicated team ensure that you receive the highest quality
               medical services in a comfortable and welcoming environment.
             </p>
@@ -195,7 +199,7 @@ export default function Home() {
                     <DocumentAltIcon className="h-7 w-[24.6px] text-sky" />
                   </span>
                   <span className="mb-[17px] font-manrope text-[18px] font-semibold leading-[1.3] text-heading-alt">
-                    Modern technologies
+                    Compassionate Care
                   </span>
                 </div>
                 <Reveal variant="fadeInDown" delay={100}>
@@ -205,7 +209,7 @@ export default function Home() {
                 </Reveal>
                 <p className="copy mt-5">
                   We value each and every human life placed in our hands and constantly work towards
-                  meeting the expectations of our customers.
+                  meeting the expectations of our patients.
                 </p>
               </Reveal>
               <Reveal variant="fadeInLeft" delay={300} className="mt-[47px]">
@@ -288,14 +292,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------- Book online ---------------- */}
-      <section>
-        <div className="container-1280">
-          <div className="py-[10px]">
-            <HighlightHeadline href={CLINIC.hotdoc} />
-          </div>
-        </div>
-      </section>
     </>
   );
 }

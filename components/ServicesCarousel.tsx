@@ -64,21 +64,23 @@ export function ServicesCarousel() {
                 <div className="mb-[5px] flex h-[100px] w-[100px] items-center justify-center rounded-full bg-pale p-[25px]">
                   <Icon className="h-[50px] w-[50px] text-[#25c4cf]" />
                 </div>
+                {/* Live only swaps the card background on hover — the title,
+                    description and Read More keep their own colours. */}
                 <h3
-                  className="mb-[9px] text-[31px] font-semibold leading-[1.3] text-heading transition-colors group-hover:text-white"
+                  className="mb-[9px] text-[31px] font-semibold leading-[1.3] text-heading"
                   style={{ fontFamily: "Helvetica, sans-serif" }}
                 >
                   {service.title}
                 </h3>
                 <p
-                  className="text-[16px] leading-[22.4px] text-muted transition-colors group-hover:text-white/80"
+                  className="text-[16px] leading-[22.4px] text-muted"
                   style={{ fontFamily: "Arial, sans-serif" }}
                 >
                   {service.description}
                   <br />
                   <Link
                     href="/services"
-                    className="relative top-[11px] text-[12px] font-semibold text-black transition-colors group-hover:text-white"
+                    className="relative top-[11px] text-[12px] font-semibold text-black"
                     style={{ fontFamily: "Arial, sans-serif" }}
                   >
                     Read More

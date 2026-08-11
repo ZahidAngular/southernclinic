@@ -1,11 +1,14 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
+import { Reveal } from "@/components/Reveal";
 import { DOCTORS } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Doctors – The Southern Clinic",
 };
+
+const TRAILING_SPACE = ["Dr. Rubina Munir", "Dr. Tejbir Sidhu"];
 
 export default function DoctorsPage() {
   return (
@@ -15,27 +18,35 @@ export default function DoctorsPage() {
       {DOCTORS.map((doctor) => (
         <section key={doctor.fullName}>
           <div className="container-1280">
-            <div className="flex flex-col py-12 lg:flex-row lg:pb-16 lg:pt-20">
-              <div className="w-full lg:w-1/2">
-                <Image
-                  src={doctor.photo}
-                  alt={doctor.fullName}
-                  width={479}
-                  height={600}
-                  className="mx-auto h-auto w-full max-w-[479px] object-cover"
-                />
+            <div className="flex flex-col py-12 lg:flex-row lg:gap-5 lg:pb-16 lg:pt-20">
+              <div className="flex w-full flex-col items-center gap-7 lg:w-[630px]">
+                <Reveal variant="bounceIn">
+                  <Image
+                    src={doctor.photo}
+                    alt={doctor.fullName}
+                    width={479}
+                    height={600}
+                    className="mx-auto h-auto w-full max-w-[479px] rounded-[14px] object-cover lg:h-[600px] lg:w-[479px]"
+                  />
+                </Reveal>
               </div>
-              <div className="w-full px-4 py-12 lg:w-1/2 lg:pl-0 lg:pr-4">
-                <h2 className="font-manrope text-[28px] font-semibold leading-[1.2] tracking-[-0.5px] text-heading lg:text-[39px]">
+              <div className="flex w-full flex-col gap-5 px-4 py-12 lg:w-[630px] lg:pl-0 lg:pr-4">
+                <h2 className="font-montserrat text-[28px] font-semibold leading-[50.7px] text-heading lg:text-[39px]">
                   {doctor.fullName}
                 </h2>
-                <p className="mt-2 font-inter text-[16px] text-muted">{doctor.role}</p>
-                <div className="mt-6 space-y-6">
+                {/* Elementor pulls the specialty line up flush under the name */}
+                <p className="-mt-5 mb-[25.6px] font-inter text-[16px] leading-[1.4] text-muted">
+                  {doctor.role}
+                </p>
+                <div>
                   {doctor.bio.map((paragraph) => (
-                    <p key={paragraph} className="copy text-body-dark">
+                    <p key={paragraph} className="copy copy-dark mb-[27.2px]">
                       {paragraph}
                     </p>
                   ))}
+                  {/* Dr. Munir and Dr. Tejbir carry an empty 32px block after their
+                      bio on the live site — kept so the sections line up. */}
+                  {TRAILING_SPACE.includes(doctor.fullName) && <div className="h-8" />}
                 </div>
               </div>
             </div>

@@ -1,8 +1,11 @@
 import Image from "next/image";
 import type { Metadata } from "next";
-import { Briefcase, Clock, FileText, Mail, MapPin, Phone, Play } from "lucide-react";
+import { Clock, FileText } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { Accordion } from "@/components/Accordion";
+import { SitePopup } from "@/components/SitePopup";
+import { Reveal } from "@/components/Reveal";
+import { BriefcaseIcon, EmailIcon, LocationPinIcon, PhoneIcon } from "@/components/icons";
 import { AFTER_HOURS, CLINIC, CONTACT_FAQS, OPENING_HOURS } from "@/lib/content";
 
 export const metadata: Metadata = {
@@ -11,22 +14,22 @@ export const metadata: Metadata = {
 
 const INFO_CARDS = [
   {
-    icon: MapPin,
+    icon: LocationPinIcon,
     title: "Clinic location",
     lines: [CLINIC.address],
   },
   {
-    icon: Mail,
+    icon: EmailIcon,
     title: "Email address",
-    lines: [`${CLINIC.emails[0]} ${CLINIC.emails[1]}`],
+    lines: [CLINIC.emails[0], CLINIC.emails[1]],
   },
   {
-    icon: Phone,
+    icon: PhoneIcon,
     title: "Let's talk with us",
     lines: [`Phone: ${CLINIC.phone}`, `Fax: ${CLINIC.fax}`],
   },
   {
-    icon: Briefcase,
+    icon: BriefcaseIcon,
     title: "Doctor consulting",
     lines: ["Please call Clinic and Check Availablity."],
   },
@@ -40,21 +43,27 @@ export default function ContactPage() {
       {/* ---------------- Info cards ---------------- */}
       <section className="bg-soft py-16 lg:pb-[100px] lg:pt-[98px]">
         <div className="container-1280">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            {/* Each column carries its own 15px gutter — matching the live
+                site's per-column padding rather than a single grid gap. */}
             {INFO_CARDS.map(({ icon: Icon, title, lines }) => (
-              <article key={title} className="rounded-[5px] bg-white p-[15px] px-8 py-12 text-center">
-                <Icon className="mx-auto h-10 w-10 text-[#2575FC]" strokeWidth={1.5} />
-                <h3 className="mb-4 mt-6 font-montserrat text-[21px] font-semibold text-black">
-                  {title}
-                </h3>
-                <p className="font-inter text-[15px] font-medium leading-[1.6] text-[#565656]">
-                  {lines.map((line) => (
-                    <span key={line} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </p>
-              </article>
+              <div key={title} className="p-[15px]">
+                <article className="rounded-[5px] bg-white px-10 py-12 text-center">
+                  <span className="mx-auto mb-[13px] flex h-[100px] w-[100px] items-center justify-center rounded-full bg-[#dcf6f7]">
+                    <Icon className="h-[45px] w-[45px] text-sky" />
+                  </span>
+                  <h3 className="mb-5 font-raleway text-[21px] font-semibold leading-[25px] text-black">
+                    {title}
+                  </h3>
+                  <p className="font-manrope text-[15px] font-medium leading-[25px] text-[#565656]">
+                    {lines.map((line) => (
+                      <span key={line} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </p>
+                </article>
+              </div>
             ))}
           </div>
         </div>
@@ -82,9 +91,11 @@ export default function ContactPage() {
                   Basic information for patients
                 </span>
               </div>
-              <h1 className="h-display mb-8 text-[32px] leading-[1.15] lg:text-[45px] lg:leading-[50px]">
-                We&apos;re here to help.
-              </h1>
+              <Reveal variant="fadeInDown" delay={100}>
+                <h1 className="h-display mb-8 text-[32px] leading-[1.15] lg:text-[45px] lg:leading-[50px]">
+                  We&apos;re here to help.
+                </h1>
+              </Reveal>
               <Accordion items={CONTACT_FAQS} />
             </div>
 
@@ -120,50 +131,73 @@ export default function ContactPage() {
       {/* ---------------- After hours service ---------------- */}
       <section>
         <div className="container-1280">
-          <div className="flex flex-col py-16 lg:flex-row lg:pb-36 lg:pt-28">
-            <div className="w-full px-4 lg:w-1/2 lg:pb-12 lg:pr-20">
-              <h1 className="h-display text-[32px] leading-[1.15] lg:text-[45px] lg:leading-[50px]">
-                After Hours Service
-              </h1>
-              <p className="copy mt-6 text-black">
+          <div className="flex flex-col py-16 lg:flex-row lg:items-center lg:gap-5 lg:pb-36 lg:pt-28">
+            <div className="flex w-full flex-col gap-5 px-4 lg:w-[631px] lg:pr-20">
+              <Reveal variant="fadeInDown" delay={100}>
+                <h1 className="h-display text-[32px] leading-[1.15] lg:text-[45px] lg:leading-[50px]">
+                  After Hours Service
+                </h1>
+              </Reveal>
+              <p className="copy text-black">
                 For after-hours medical care please check the options below.
               </p>
 
-              <div className="mt-6">
-                {AFTER_HOURS.map((item) => (
-                  <div key={item.label}>
-                    <p className="py-4 font-manrope text-[17px]">
-                      <span className="font-bold text-black">{item.label}</span>{" "}
-                      <a href={item.href} className="text-muted hover:text-sky">
-                        {item.value}
-                      </a>
-                    </p>
-                    <div className="h-px w-full bg-black/10" />
-                  </div>
-                ))}
-                <p className="pt-6 font-manrope text-[16px]">
-                  <span className="font-bold text-black">Call healthdirect:</span>{" "}
-                  <a href="tel:1800022222" className="text-muted hover:text-sky">
-                    1800 022 222
-                  </a>
-                </p>
-                <p className="pt-4 font-manrope text-[16px] font-bold text-black">
-                  If an emergency call 000 or go to your nearest Public Hospital.
-                </p>
-              </div>
+              {AFTER_HOURS.map((item) => (
+                <div key={item.label} className="flex flex-col gap-5">
+                  <p className="font-manrope text-[17px] leading-[32px] text-black">
+                    <span className="font-bold">{item.label}</span>{" "}
+                    <a href={item.href} className="text-muted underline hover:text-sky">
+                      {item.value}
+                    </a>
+                    {item.note && (
+                      <>
+                        <br />
+                        {item.note}
+                      </>
+                    )}
+                  </p>
+                  <div className="h-px w-full bg-black" />
+                </div>
+              ))}
+
+              <p className="font-inter text-[16px] leading-[22.4px] text-black">
+                <span className="font-bold">Call healthdirect:</span>{" "}
+                <a href="tel:1800022222" className="text-muted underline hover:text-sky">
+                  1800 022 222
+                </a>
+                <br />
+                Where a registered nurse will talk to you about your symptoms. A callback or a
+                video call from a GP who can provide advice may be offered.
+              </p>
+              <p className="font-inter text-[16px] font-bold text-black">
+                If an emergency call 000 or go to your nearest Public Hospital.
+              </p>
+              {/* Invisible leftover element on the live page still occupies space */}
+              <div className="h-[48px]" />
             </div>
 
-            <div className="relative w-full bg-white/[0.17] lg:w-1/2">
-              <Image
-                src="/images/fees-afterhour-service-1.jpg"
-                alt=""
-                width={1280}
-                height={853}
-                className="h-auto w-full object-cover"
-              />
-              <span className="absolute left-1/2 top-1/2 flex h-[70px] w-[70px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-heading-alt shadow-lg">
-                <Play className="h-6 w-6" fill="currentColor" />
-              </span>
+            <div className="w-full lg:w-[629px]">
+              {/* Same outlined frame as the About/Services page images: image
+                  overflows the frame by 32px right/down, revealing the border
+                  on the top-left. */}
+              <div className="relative rounded-[14px] border border-[#b2f6f8] bg-white/[0.17]">
+                <Reveal variant="zoomIn">
+                  <Image
+                    src="/images/fees-afterhour-service-building.jpg"
+                    alt=""
+                    width={1280}
+                    height={853}
+                    className="h-auto w-full rounded-[14px] object-cover lg:h-[560px] lg:w-[627px] lg:translate-x-8 lg:translate-y-8"
+                  />
+                </Reveal>
+                {/* Its left edge sits flush with the frame's left edge,
+                    vertically centred — matches the live button exactly.
+                    Not wrapped in Reveal: SitePopup's own button is
+                    `position: absolute`, so a wrapping div collapses to zero
+                    size and Reveal's own visibility check never sees it
+                    on-screen, leaving the button permanently hidden. */}
+                <SitePopup />
+              </div>
             </div>
           </div>
         </div>

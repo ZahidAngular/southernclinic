@@ -12,11 +12,12 @@ import { useEffect, useRef, useState } from "react";
  * never replay — so scrolling down the page reveals sections the same way the
  * original does instead of everything having already animated at load.
  */
-type Variant = "fadeIn" | "fadeInDown" | "fadeInLeft" | "zoomIn" | "bounceIn";
+type Variant = "fadeIn" | "fadeInDown" | "fadeInUp" | "fadeInLeft" | "zoomIn" | "bounceIn";
 
 const ANIMATION: Record<Variant, string> = {
   fadeIn: "sc-fadeIn 0.8s ease-out both",
   fadeInDown: "sc-fadeInDown 0.8s ease-out both",
+  fadeInUp: "sc-fadeInUp 0.8s ease-out both",
   fadeInLeft: "sc-fadeInLeft 0.8s ease-out both",
   zoomIn: "sc-zoomIn 0.8s ease-out both",
   bounceIn: "sc-bounceIn 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both",
